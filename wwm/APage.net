@@ -1,1 +1,4 @@
-print("hi")
+while true do
+  print("hi")
+  coroutine.yield()
+end
