@@ -28,14 +28,17 @@ local function page(page)
 	for i in string.gmatch(page, "[^://]+") do
 		table.insert(tPage, i)
 	end
+	if tPage[1] and tPage[2] then
 	local WebProtocol = tPage[1] --Extra variables for better readability.
 	local PageName = tPage[2]
 	local success, download = pcall(function() http.get(webcenter.."/"..WebProtocol.."/"..PageName) end)
-
-	if not success then
+	_G.success = success
+	end else _G.success = false
+	if not _G.success then
 		error("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue")
 		--error("Unable to connect to "..tPage[2].."\n in Protocol "..tPage[1]) Remnant from WebCraft. Has been replaced with more helpful error messsage.
 	end
+	_G.success = nil
 
 	local handler = download.readAll()
 	download.close()
