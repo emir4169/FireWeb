@@ -33,6 +33,7 @@ local function page(page)
 	end
 	if not tPage[1] and tPage[2] then
 		_G.success = false
+	end
 	_G.error = function(message)
 		print("FireWeb Error: "..message) 
 	end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
