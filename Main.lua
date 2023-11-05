@@ -30,10 +30,12 @@ local function page(page)
 		local PageName = tPage[2]
 		local success, download = pcall(function() http.get(webcenter.."/"..WebProtocol.."/"..PageName) end)
 		_G.success = success
-	else _G.success = false
+	end
+	if not tPage[1] and tPage[2] then
+		_G.success = false
 	_G.error = function(message)
 		print("FireWeb Error: "..message) 
-		end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
+	end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
 	if not _G.success then
 		if tPage[1] and tPage[2] then
 		error("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue")
