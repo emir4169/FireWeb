@@ -21,9 +21,6 @@ f:close()
 end
 
 local function page(page)
-	_G.error = function(message)
-	print("FireWeb Error: "..message) 
-	end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
 	local tPage = {};
 	for i in string.gmatch(page, "[^://]+") do
 		table.insert(tPage, i)
@@ -36,6 +33,9 @@ local function page(page)
 	else 
 		_G.success = false
 	end
+	_G.error = function(message)
+		print("FireWeb Error: "..message) 
+		end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
 	if not _G.success then
 		if tPage[1] and tPage[2] then
 		error("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue")
