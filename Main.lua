@@ -1,12 +1,10 @@
 settings.define("fireweb.websitecenter", {
     description = "This setting controls where FireWeb gets web pages from.",
     default = "https://github.com/emir4169/FireWeb",
-    type = "string"
 })
 settings.define("fireweb.updateplace", {
     description = "This setting controls where FireWeb puts updated versions.",
     default = "/FireWeb.lua",
-    type = "string"
 })
 local webcenter = settings.get("fireweb.websitecenter")
 local mainTerm = term
