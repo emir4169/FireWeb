@@ -1,7 +1,3 @@
---if not term.isColor() then
-	--printError("FireWeb currently only has support for Advanced Computers.")
---end
--- Decided to add support.
 settings.define("fireweb.websitecenter", {
     description = "This setting controls where FireWeb gets web pages from.",
     default = "https://github.com/emir4169/FireWeb",
