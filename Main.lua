@@ -30,9 +30,7 @@ local function page(page)
 		local PageName = tPage[2]
 		local success, download = pcall(function() http.get(webcenter.."/"..WebProtocol.."/"..PageName) end)
 		_G.success = success
-	else 
-		_G.success = false
-	end
+	else _G.success = false
 	_G.error = function(message)
 		print("FireWeb Error: "..message) 
 		end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
