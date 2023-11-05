@@ -29,11 +29,13 @@ local function page(page)
 		table.insert(tPage, i)
 	end
 	if tPage[1] and tPage[2] then
-	local WebProtocol = tPage[1] --Extra variables for better readability.
-	local PageName = tPage[2]
-	local success, download = pcall(function() http.get(webcenter.."/"..WebProtocol.."/"..PageName) end)
-	_G.success = success
-	end else _G.success = false
+		local WebProtocol = tPage[1] --Extra variables for better readability.
+		local PageName = tPage[2]
+		local success, download = pcall(function() http.get(webcenter.."/"..WebProtocol.."/"..PageName) end)
+		_G.success = success
+	else 
+		_G.success = false
+	end
 	if not _G.success then
 		if tPage[1] and tPage[2] then
 		error("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue")
