@@ -3,13 +3,25 @@ settings.define("fireweb.websitecenter", {
     default = "https://github.com/emir4169/FireWeb",
     type = string,
 })
-local webcenter = settings.get("fireweb.websitecenter"))
+settings.define("fireweb.updateplace", {
+    description = "This setting controls where FireWeb puts updated versions.",
+    default = "/FireWeb.lua",
+    type = string,
+})
+local webcenter = settings.get("fireweb.websitecenter")
 local mainTerm = term
 local currentTerm = term.current()
 local running = true
 _G.normalerror = _G.error -- This saves a copy of the built in error handler.
 local w, h = term.getSize();
-		
+local function FireWeb_Updater()
+local updater_success, updater_download = pcall(function() http.get("https://raw.githubusercontent.com/emir4169/FireWeb/master/Main.lua") end)
+local data = response.readAll()
+local f = io.open(settings.get("fireweb.updateplace"), "w")
+f:write(data)
+f:close()
+end
+
 local function page(page)
 	_G.error = function(message)
 	print("FireWeb Error: "..message) 
