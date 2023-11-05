@@ -13,12 +13,13 @@ local running = true
 _G.normalerror = _G.error -- This saves a copy of the built in error handler.
 local w, h = term.getSize();
 local function FireWeb_Updater()
-local updater_success, updater_download = pcall(function() http.get("https://raw.githubusercontent.com/emir4169/FireWeb/master/Main.lua") end)
-local data = response.readAll()
-local f = io.open(settings.get("fireweb.updateplace"), "w")
+	local updater_success, updater_download = pcall(function() http.get("https://raw.githubusercontent.com/emir4169/FireWeb/master/Main.lua") end)
+	local data = updater_download.readAll()
+	local f = io.open(settings.get("fireweb.updateplace"), "w")
 f:write(data)
 f:close()
 end
+FireWeb_Updater()
 
 local function page(page)
 	local tPage = {};
@@ -29,24 +30,25 @@ local function page(page)
 		local WebProtocol = tPage[1] --Extra variables for better readability.
 		local PageName = tPage[2]
 		local success, download = pcall(function() http.get(webcenter.."/"..WebProtocol.."/"..PageName) end)
-		_G.success = success
+		_G.fireweb.nastyhacks.errorchecking.success = success
+		_G.fireweb.nastyhacks.errorchecking.download = download
 	end
 	if not tPage[1] and tPage[2] then
-		_G.success = false
+		_G.fireweb.nastyhacks.errorchecking.success = false
 	end
 	_G.error = function(message)
 		print("FireWeb Error: "..message) 
 	end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
-	if not _G.success then
+	if not _G.fireweb.nastyhacks.errorchecking.success  then
 		if tPage[1] and tPage[2] then
 		error("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue")
 		--error("Unable to connect to "..tPage[2].."\n in Protocol "..tPage[1]) Remnant from WebCraft. Has been replaced with more helpful error messsage.
 		end
 	end
-	_G.success = nil
+	_G.fireweb.nastyhacks.errorchecking.success = nil
 
-	local handler = download.readAll()
-	download.close()
+	local handler = _G.fireweb.nastyhacks.errorchecking.download.readAll()
+	_G.fireweb.nastyhacks.errorchecking.download.close()
 	--Will rewrite how tmp works in a later commit.
 	--local file = fs.open("tmp/"..tPage[2], "w")
 	--file.write(handler)
