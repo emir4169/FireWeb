@@ -28,7 +28,7 @@ local function page(page)
 
 	if not success then
 		error("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue)
-		--error("Unable to connect to "..tPage[2].."\n in Protocol "..tPage[1]) -- Remnant from WebCraft. Has been replaced with more helpful error messsage.
+		--error("Unable to connect to "..tPage[2].."\n in Protocol "..tPage[1]) Remnant from WebCraft. Has been replaced with more helpful error messsage.
 	end
 
 	local handler = download.readAll()
