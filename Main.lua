@@ -44,7 +44,7 @@ local function page(page)
 	end -- Replaces the built in error handler with the FireWeb error handler, This will allow recovery from an error.
 	if not _G.fireweb.nastyhacks.errorchecking.success or type(_G.fireweb.nastyhacks.errorchecking.download) ~= "table" then
 		if tPage[1] and tPage[2] then
-		customerror("The download for "..PageName.." in the protocol "..WebProtocol.." has failed, this could be a connection issue")
+		customerror("The download for "..tPage[2].." in the protocol "..tPage[1].." has failed, this could be a connection issue")
 		--error("Unable to connect to "..tPage[2].."\n in Protocol "..tPage[1]) Remnant from WebCraft. Has been replaced with more helpful error messsage.
 		end
 	end
