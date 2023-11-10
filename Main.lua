@@ -18,8 +18,12 @@ local function FireWeb_Updater()
 f:write(data)
 f:close()
 end
-FireWeb_Updater()
-
+if not arcos then
+	FireWeb_Updater()
+end
+_G.fireweb = {}
+_G.fireweb.nastyhacks = {}
+_G.fireweb.nastyhacks.errorchecking = {}
 local function page(page)
 	local tPage = {};
 	for i in string.gmatch(page, "[^://]+") do
